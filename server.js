@@ -12,15 +12,18 @@ app.prepare()
   .then(() => {
     const server = express()
 
-    server.get('/woot', (req, res) => {
-      const printDate = Math.random() > 0.5
-      if (printDate) {
+    const woot = (req, res) => {
+      // const printDate = Math.random() > 0.5
+      // if (printDate) {
         res.end(`Date: ${Date.now()}`)
         return
-      }
+      // }
+      //
+      // app.render(req, res, '/woot2')
+    };
 
-      app.render(req, res, '/woot2')
-    })
+    server.get('/woot_prefetch', woot)
+    server.get('/woot_no_prefetch', woot)
 
     server.get('*', (req, res) => {
       handle(req, res)
